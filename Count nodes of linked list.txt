@@ -1,0 +1,44 @@
+Count nodes of linked list
+Given a singly linked list. The task is to find the length of the linked list, where length is defined as the number of nodes in the linked list.
+
+Example 1:
+
+Input:
+LinkedList: 1->2->3->4->5
+Output: 5
+Explanation: Count of nodes in the 
+linked list is 5, which is its length.
+Example 2:
+
+Input:
+LinkedList: 2->4->6->7->5->1->0
+Output: 7
+Explanation: Count of nodes in the
+linked list is 7. Hence, the output
+is 7.
+---------------------------------------------
+Time complexity=O(n)/theta(n)
+Space Complexity=O(1)
+class Solution
+{
+    //Function to count nodes of a linked list.
+    public static int getCount(Node head)
+    {
+        
+        //Code here
+        
+        if(head==null)
+        return 0;
+        
+        int count=0;
+        Node curr=head;
+        
+        while(curr!=null)
+        {
+            count++;
+            curr=curr.next;
+        }
+        
+        return count;
+    }
+}

@@ -1,0 +1,35 @@
+Move Zeros at the end
+
+Example:-
+INPUT:-0 0 4 0 5 0
+OUTPUT:-0 0 0 0 5 4 
+------------------------------
+Time Complexity=O(n)
+Space Complexity=O(1)
+
+class GfG{
+    public Node moveZeroes(Node head){
+        //Your Code here.
+        if(head==null)
+        return head;
+       
+        Node curr=head;
+        Node temp=head;
+        
+          while(curr!=null)
+          {
+              if(curr.data==0)
+              { 
+                  int res=temp.data;
+                  temp.data=curr.data;
+                  curr.data=res;
+                  temp=temp.next;
+                  curr=curr.next;
+              }
+              else
+              curr=curr.next;
+          }
+          return head;
+        
+    }
+}

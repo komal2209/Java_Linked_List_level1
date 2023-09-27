@@ -1,0 +1,142 @@
+Remove duplicates from an unsorted linked list
+
+-----------------------------------------------------------Using Hashmap-------------------------------------------------
+Time complexity=O(n)
+space complexity=O(n)
+
+class Solution
+{
+    //Function to remove duplicates from unsorted linked list.
+    public Node removeDuplicates(Node head) 
+    {
+         // Your code here
+         if(head==null)
+         {
+             return null;
+         }
+         if(head.next==null)
+         {
+          return head;   
+         }
+         
+        HashMap<Integer,Boolean>arr=new HashMap<Integer,Boolean>();
+        Node curr=head;
+        Node prev=null;
+        while(curr!=null)
+        {
+            if(arr.containsKey(curr.data)==true)
+            {
+              prev.next=curr.next;
+                
+            }
+            else
+            {
+                arr.put(curr.data,true);
+                prev=curr;  
+            }
+            curr=curr.next;
+        }
+        
+        
+     return head;   
+    }
+}
+------------------------------------------------------------------------------------------using two loops ------------------------------------------------------------------
+TIME COMPLEXITY=O(N^2)
+SPACECOMPLEXITY=O(1)
+class Solution
+{
+    //Function to remove duplicates from unsorted linked list.
+    public Node removeDuplicates(Node head) 
+    {
+         // Your code here
+         if(head==null)
+         {
+             return null;
+         }
+         if(head.next==null)
+         {
+          return head;   
+         }
+         
+        Node curr=head;
+        Node prev=null;
+        while(curr!=null)
+        {
+          Node temp=curr.next;
+          prev=curr;
+          while(temp!=null)
+          {
+              if(temp.data==curr.data)
+              {
+                  prev.next=temp.next;
+              }
+              else
+              {
+              prev=temp;
+              }
+              temp=temp.next;
+          }
+          curr=curr.next;
+          
+        }
+        
+        
+     return head;   
+    }
+}
+
+
+
+------------------------------------------------------------orders are changing----------------------------------------------
+Time complexity=O(nlogn)
+space complexity=O(n)
+class Solution
+{
+    //Function to remove duplicates from unsorted linked list.
+    public Node removeDuplicates(Node head) 
+    {
+         // Your code here
+         if(head==null)
+         {
+             return null;
+         }
+         if(head.next==null)
+         {
+          return head;   
+         }
+         
+         ArrayList<Integer>arr=new ArrayList<Integer>();
+        Node curr=head;
+        Node prev=null;
+        while(curr!=null)
+        {
+           arr.add(curr.data);
+            curr=curr.next;
+        }
+        Collections.sort(arr);
+        
+        int i=0;
+        curr=head;
+        while(curr!=null && i<arr.size())
+        {
+           curr.data=arr.get(i);
+            curr=curr.next;
+            i++;
+        }
+        curr=head;
+         while(curr!=null && curr.next!=null)
+         {
+          if(curr.data==curr.next.data)
+          {
+              curr.next=curr.next.next;
+          }
+          else
+           curr=curr.next;   
+          
+         }
+        
+        
+     return head;   
+    }
+}

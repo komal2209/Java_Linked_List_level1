@@ -1,0 +1,41 @@
+Node at a given index in linked list
+Given a singly linked list with N nodes and a number X. The task is to find the node at the given index (X)(1 based index) of linked list. 
+
+Input:
+First line of input contains number of testcases T. For each testcase, first line of input contains space seperated two integers, length of linked list and X.
+
+Output:
+For each testcase, there will be single line of output containing data at Xth node.
+
+Example:
+Input:
+2
+6 5
+1 2 3 4 657 76
+10 2
+8 7 10 8 6 1 20 91 21 2
+
+Output:
+657
+7
+------------------------------------------------------------------------------------------
+Time complexity=O(index-2)
+Space Complexity=O(1)
+
+class GfG
+{
+   
+    public static int getNth(Node node, int ind)
+    {
+       //Your code here
+       int i=0;
+       Node temp=node;
+       while(i<ind-1)
+       {
+           temp=temp.next;
+           i++;
+       }
+       
+       return temp.data;
+    }
+}

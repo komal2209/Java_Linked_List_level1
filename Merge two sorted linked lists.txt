@@ -1,0 +1,128 @@
+Merge two sorted linked lists
+
+Given two sorted linked lists consisting of N and M nodes respectively. The task is to merge both of the list (in-place) and return head of the merged list.
+ 
+
+Example 1:
+
+Input:
+N = 4, M = 3 
+valueN[] = {5,10,15,40}
+valueM[] = {2,3,20}
+Output: 2 3 5 10 15 20 40
+Explanation: After merging the two linked
+lists, we have merged list as 2, 3, 5,
+10, 15, 20, 40.
+Example 2:
+
+Input:
+N = 2, M = 2
+valueN[] = {1,1}
+valueM[] = {2,4}
+Output:1 1 2 4
+Explanation: After merging the given two
+linked list , we have 1, 1, 2, 4 as
+output.
+---------------------------------------------------------------------
+Time Complexity=O(n)
+Space Complexity=O(1)
+
+
+class LinkedList
+{
+    //Function to merge two sorted linked list.
+    
+
+    Node sortedMerge(Node head1, Node head2)
+    {
+     // This is a "method-only" submission. 
+     // You only need to complete this method
+     
+    if(head1==null)
+	return head2;
+	
+    if(head2==null)
+	return head1;
+	
+	Node finalhead=null;
+	if(head1.data<head2.data)
+	   finalhead=head1; 
+	else
+	  	   finalhead=head2; 
+ 
+	
+	
+	Node curr1=head1;
+	Node curr2=head2;
+	Node prev=new Node(-1);
+	
+	while( curr1!=null && curr2!=null)
+	{
+	    
+	    if((prev.data<=curr2.data)&&(curr2.data<=curr1.data))
+	    {
+	        Node next2=curr2.next;
+	        
+	        prev.next=curr2;
+	        curr2.next=curr1;
+	        
+	         prev=curr2;
+	         curr1=curr1;
+	         curr2=next2;
+	    }
+	    
+	    else
+	    {
+	        	    Node next1=curr1.next;
+	        	     prev=curr1;
+	                 curr1=next1;
+        }
+	}
+	
+	if(curr1==null)
+	{
+		 	prev.next=curr2;
+	}
+		       	
+	return finalhead;
+   } 
+}
+
+-------------------------------------using recursion=============================
+Time Complexity=O(n)
+Space Complexity=O(1)
+class LinkedList
+{
+    //Function to merge two sorted linked list.
+    
+
+    Node sortedMerge(Node head1, Node head2)
+    {
+     // This is a "method-only" submission. 
+     // You only need to complete this method
+     
+    if(head1==null)
+	return head2;
+	
+    if(head2==null)
+	return head1;
+	
+	Node finalhead=null;
+
+
+
+	    if(head1.data<head2.data)
+	    {
+	        head1.next=sortedMerge(head1.next,head2);
+	        return head1;
+	    }
+	    else
+	    {
+	        	        head2.next=sortedMerge(head1,head2.next);
+	        	        return head2;
+	    }
+	   
+	
+	
+   } 
+}

@@ -1,0 +1,106 @@
+Insert in Middle of Linked List
+Given a linked list of size N and a key. The task is to insert the key in the middle of the linked list.
+
+Example 1:
+Input:
+LinkedList = 1->2->4
+key = 3
+Output: 1 2 3 4
+Explanation: The new element is inserted
+after the current middle element in the
+linked list.
+
+Example 2:
+Input:
+LinkedList = 10->20->40->50
+key = 30
+Output: 10 20 30 40 50
+Explanation: The new element is inserted
+after the current middle element in the
+linked list and Hence, the output is
+10 20 30 40 50.
+----------------------------------------------------------------------------------------------------
+Time Complexity=O(n)
+space complexity=O(1)
+
+class Solution {
+    
+    public Node insertInMid(Node head, int data){
+        //Insert code here, return the head of modified linked list
+        Node temp=new Node(data); 
+        
+        if(head==null)
+        return temp;
+        
+        Node curr=head;
+        int count=1;
+        while(curr.next!=null)
+        {
+            curr=curr.next;
+            count++;
+        }
+       Node curr1=head;
+       int remainder=count%2;
+       
+       if(remainder!=0)
+       {
+          for(int i=1;i<(count/2)+1;i++)
+            curr1=curr1.next;
+       }
+       else
+       {
+        for(int i=1;i<(count/2);i++)
+            curr1=curr1.next;
+       }
+        
+        temp.next=curr1.next;
+        curr1.next=temp;
+        return head;
+    }
+}
+
+
+
+--------------------------------------------------------------------------------------------------------
+Time Complexity=O(n)
+space complexity=O(1)
+
+class Solution {
+    
+    public Node insertInMid(Node head, int data){
+        //Insert code here, return the head of modified linked list
+        Node temp=new Node(data); 
+        
+        if(head==null)
+        return temp;
+        
+        Node curr=head;
+        int count=1;
+        while(curr.next!=null)
+        {
+            curr=curr.next;
+            count++;
+        }
+        
+        int mid=0;
+        int remainder=count%2;
+        
+        if(remainder!=0)
+         mid=(count/2)+1;
+        else
+            mid=count/2;
+        
+        int start=1;
+        Node curr1=head;
+
+        while(start<mid)
+        {
+            start++;
+            curr1=curr1.next;
+        }
+        
+        temp.next=curr1.next;
+        curr1.next=temp;
+        return head;
+    }
+}

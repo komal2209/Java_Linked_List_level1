@@ -1,0 +1,220 @@
+Segregate even and odd nodes in a Link List.
+
+Given a link list of size N, modify the list such that all the even numbers appear before all the odd numbers in the modified list. The order of appearance of numbers within each segregation should be same as that in the original list.
+
+Example 1:
+
+Input: 
+N = 7
+Link List:
+17 -> 15 -> 8 -> 9 -> 2 -> 4 -> 6 -> NULL
+
+Output: 8 2 4 6 17 15 9
+
+Explaination: 8,2,4,6 are the even numbers 
+so they appear first and 17,15,9 are odd 
+numbers that appear later.
+
+-----------------------------------------------------Naive to naive approach--------------------------
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(i)+O(j) where i and j are the size of even and odd size arraylist
+
+class Solution{
+    Node divide(int N, Node head){
+        // code here
+        ArrayList<Integer> evenNode=new ArrayList<Integer>();
+        ArrayList<Integer> oddNode=new ArrayList<Integer>();
+        
+        Node curr=head;
+        while(curr!=null)
+        {
+            if(curr.data%2==0)
+            {
+                evenNode.add(curr.data);
+                curr=curr.next;
+            }
+            else
+            {
+                 oddNode.add(curr.data);
+                curr=curr.next;
+            }
+            
+        }
+        
+        curr=head; int i=0;
+        while(curr!=null && i<evenNode.size())
+        {
+            curr.data=evenNode.get(i);
+            i++;
+            curr=curr.next;
+        }
+         int j=0;
+         while(curr!=null && j<oddNode.size())
+        {
+            curr.data=oddNode.get(j);
+            j++;
+            curr=curr.next;
+        }
+        
+        return head;
+    }
+}
+---------------------------------------------------------Naive Approach(using two traversal)-------------------------------------
+Expected Time complexity=O(N)
+Expected Space complexity=o(1)
+
+class Solution{
+ 
+ Node divide(int N, Node head)
+ {
+        // code here
+        if(head==null)
+        {
+            return null;
+        }
+        if(head.next==null)
+        {
+            return head;
+        }
+        
+     int counteven=0;
+     int countodd=0;
+     Node curr=head;
+     Node prev=null;
+
+   // here we are counting total number of node which is containg even or odd  data.
+  
+     while(curr.next!=null)
+     { 
+        if(curr.data%2==0)
+            counteven++;
+
+        else
+            countodd++;
+        
+        curr=curr.next;
+     }
+         
+     Node lastnode=curr;
+
+     // checking lastnode data  is even or odd 
+
+     if(lastnode.data%2==0)
+     {
+        counteven++;
+
+     }
+     else
+     {
+         countodd++;
+     }
+     
+     
+
+     Node finalhead=head; curr=head;
+     boolean flag=true;  prev=null;
+     int i=1;
+     
+//if nodes containg odd data  and even data more than zero then this will proceed otherwise same linked list will return.
+
+     if(counteven>0 && countodd>0)
+     {
+
+//it will run upto the current node next will become null. 
+
+         while(curr.next!=null &&i<=N)
+         { 
+
+             Node curr_next=curr.next;
+
+//we are using flag to make first node even data as head and amke that flag as false. so, it will  going to false in any condition.
+
+             if(curr.data%2==0)
+             {
+                 if(flag==true)
+                 {
+//here we are storing node reference which is containg first even data. 
+                 finalhead=curr;
+                 flag=false;
+                 }
+                 
+                 prev=curr;
+             }
+             else
+             {
+//if we find any odd node data then we will add at lastnode.next and make this one as new lastnode.
+                 lastnode.next=curr;
+                 lastnode=curr;
+                 if(prev!=null)
+                 {
+                  prev.next=curr_next;
+                 }
+
+             }
+
+             i++;
+             curr=curr_next;
+
+//make last node as null beacuse may be it is linked with someother node .
+            lastnode.next=null;
+
+         }
+
+     }
+     
+     
+   return finalhead;
+ }
+}
+
+--------------------------------------------------------------------------------dummy node-----------------------------------
+Expected Time Complexity: O(N)
+Expected Space Complexity: O(1)
+
+class Solution{
+    Node insertAtTail(Node tail,Node curr)
+    {
+        tail.next=curr;
+        return curr;
+    }
+    
+    
+Node divide(int N, Node head)
+{
+        // code here
+       
+Node evenhead=new Node(-1);
+Node eventail=evenhead;
+Node oddhead=new Node(-1);
+Node oddtail=oddhead;
+
+Node curr=head;
+while(curr!=null)
+{
+    if(curr.data%2==0)
+    {
+        eventail=insertAtTail(eventail,curr);
+    }
+    else
+    {
+             oddtail=insertAtTail(oddtail,curr);
+    }
+    curr=curr.next;
+}
+
+if(evenhead.next!=null)
+{
+eventail.next=oddhead.next;
+}
+else
+{
+   evenhead.next=oddhead.next;
+   
+}
+
+oddtail.next=null;
+
+return evenhead.next;
+
+    }
+}

@@ -1,0 +1,151 @@
+Check if Linked List is Palindrome
+Example 1:
+
+Input:
+N = 3
+value[] = {1,2,1}
+Output: 1
+Explanation: The given linked list is
+1 2 1 , which is a palindrome and
+Hence, the output is 1.
+Example 2:
+
+Input:
+N = 4
+value[] = {1,2,3,4}
+Output: 0
+Explanation: The given linked list
+is 1 2 3 4 , which is not a palindrome
+and Hence, the output is 0.
+-------------------------------------------------------------------------------
+ Time Complexity: O(N)
+ Space Complexity: O(N)
+
+class Solution
+{
+    
+    private Node revsese(Node  head1)
+    {
+          Node curr=head1;
+        Node prev=null;
+        
+        while(curr!=null)
+        {
+            Node next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+     return prev;
+    }
+    //Function to check whether the list is palindrome.
+    boolean isPalindrome(Node head) 
+    {
+        //Your code here
+        
+        if(head==null)
+            return false;
+        if(head.next==null)
+            return true;
+       Node curr=head;
+       int count=0;
+      while(curr!=null)
+      {
+       count++;
+       curr=curr.next;
+      }
+        int arr[]=new int[count];
+        Node curr1=head;
+        int i=0;
+        while(curr1!=null && i<count)
+        {
+                 arr[i]=curr1.data;
+                 curr1=curr1.next;
+                 i++;
+        }
+        
+    int left=0;
+    int right=arr.length-1;
+    
+    while(left<=right)
+    {
+       if(arr[left]==arr[right])
+       {
+           
+        left++;
+        right--;
+       }
+       else
+           return false;
+       
+    }
+       
+        return true;
+    }    
+}
+
+--------------------------------------------------------------------------------------------------------------------
+ Time Complexity: O(N)
+ Space Complexity: O(1)
+
+class Solution
+{
+    
+    private Node revsese(Node  head1)
+    {
+          Node curr=head1;
+        Node prev=null;
+        
+        while(curr!=null)
+        {
+            Node next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+     return prev;
+    }
+
+    //Function to check whether the list is palindrome.
+
+    boolean isPalindrome(Node head) 
+    {
+        //Your code here
+        
+        if(head==null)
+            return false;
+        if(head.next==null)
+            return true;
+ //(1->2->3->2->1)       
+//Finding middle of the link of the linked list(3)
+
+        Node slow=head;
+        Node fast=head;
+         while(fast!=null && fast.next!=null)
+        {
+          slow=slow.next;
+          fast=fast.next.next;
+        }
+// and then we will reverser the half linked list(1->2->3->1->2)
+
+        Node reversehead= revsese(slow);
+        Node curr2=reversehead;
+        Node curr1=head;
+
+//then we will check whether this both half linked list is matched or not
+
+        while(curr1!=null && curr2!=null)
+        {
+                 if(curr1.data!=curr2.data)//step1:-we will check curr1=1 and curr2=1
+                  return false;            //step2:-we will check curr1=2 and curr2=2
+                    else                  // step3:- curr1=3 and curr2=null so we will come out the loop
+                    {
+                      curr1=curr1.next;
+                      curr2=curr2.next;  
+                    }
+           
+        }
+       
+        return true;
+    }    
+}

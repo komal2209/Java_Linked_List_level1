@@ -1,0 +1,56 @@
+Move all zeros to the front of the linked list
+Example 1:
+
+Input:  0 -> 4 -> 0 -> 5 -> 0
+Output: 0 -> 0 -> 0 -> 4 -> 5
+Explanation: After moving all 0s of the given
+list to the front, the list is:
+0 -> 0 -> 0 -> 4 -> 5
+Example 2:
+
+Input: 0 -> 1 -> 0 -> 1 -> 2
+Output: 0 -> 0 -> 1 -> 1 -> 2
+-------------------------------------------------
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+class GfG{
+    public Node moveZeroes(Node head){
+        //Your Code here.
+        if(head==null)
+        return head;
+       int count=0;
+       ArrayList<Integer> List=new ArrayList<Integer>();
+        Node curr=head;
+        Node temp=head;
+        
+          while(curr!=null)
+          {
+              if(curr.data==0)
+              { 
+                 count++;
+              }
+              else
+              {
+              List.add(curr.data);    
+              }
+              curr=curr.next;
+          
+          }
+          
+          for(int i=0;i<count;i++)
+          {
+              temp.data=0;
+              temp=temp.next;
+          }
+          
+          for(Integer item:List)
+          {
+              temp.data=item;
+              temp=temp.next;
+          }
+          
+          return head;
+        
+    }
+}

@@ -1,0 +1,39 @@
+Delete Middle of Linked List
+
+Example 1:
+Input:
+LinkedList: 1->2->3->4->5
+Output: 1 2 4 5
+
+Example 2:
+Input:
+LinkedList: 2->4->6->7->5->1
+Output: 2 4 6 5 1 
+-------------------------------------
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(1).
+
+class Solution {
+    Node deleteMid(Node head) {
+        // This is method only submission.
+        // You only need to complete the method.
+        if(head==null ||  head.next==null)
+        return null;
+        
+        Node curr=head;
+        int count=1;
+        while(curr.next!=null)
+        {
+            curr=curr.next;
+            count++;
+        }
+        Node curr1=head;
+       for(int i=1;i<count/2;i++)
+       {
+       curr1=curr1.next;
+       }
+        curr1.next=curr1.next.next;
+        return head;
+
+    }
+}

@@ -1,0 +1,45 @@
+Search in Linked List
+Given a linked list of n nodes and a key , the task is to check if the key is present in the linked list or not.
+
+Example:
+
+Input:
+n = 4
+1->2->3->4
+Key = 3
+Output:
+True
+Explanation:
+3 is present in Linked List, so the function returns true.
+
+
+--------------------------------------------------------------------------
+Expected Time Complexity: O(n)
+Expected Space Complexity: O(1)
+class Solution {
+    static boolean searchKey(int n, Node head, int key) {
+        // Code here
+        
+        if(n==1)
+        {
+            if(head.data==key)
+            return true;
+            else 
+            return false;
+        }
+        
+        if(head==null)
+        return false;
+        Node curr=head;
+        while(curr!=null)
+        {
+            if(curr.data!=key)
+            curr=curr.next;
+            else if(curr.data==key)
+            return true;
+            
+        }
+        return false;
+        
+    }
+}

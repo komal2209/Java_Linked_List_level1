@@ -1,0 +1,30 @@
+ Identical Linked Lists
+----------------------------------------------------
+Expected Time Complexity : O(N)
+Expected Auxilliary Space : O(1)
+class Solution {
+    
+    //Function to check whether two linked lists are identical or not.
+    public boolean isIdentical (Node head1, Node head2){
+        //write your code here 
+        Node curr1=head1;
+        Node curr2=head2;
+        if(head1==null && head2==null)
+        return true;
+        
+        while(curr1!=null && curr2!=null )
+        {
+            
+            if(curr1.data!=curr2.data)
+               return false;
+            
+               curr1=curr1.next;
+                curr2=curr2.next;
+            
+        }
+           if(curr1!=null || curr2!=null)
+                return false;
+           
+     return true;
+    }
+}
