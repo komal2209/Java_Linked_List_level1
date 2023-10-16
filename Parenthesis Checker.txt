@@ -1,0 +1,109 @@
+Parenthesis Checker
+Input: exp = “[()]{}{[()()]()}” 
+Output: Balanced
+Explanation: all the brackets are well-formed
+
+Input: exp = “[(])” 
+Output: Not Balanced 
+Explanation: 1 and 4 brackets are not balanced because 
+there is a closing ‘]’ before the closing ‘(‘
+-------------------------------------------------------------
+Time Complexity=O(n)
+Space Complexity=O(n)
+
+
+class Solution
+{
+    //Function to check if brackets are balanced or not.
+    
+    static boolean matching(char a,char b)
+    {
+        if((a=='(' && b==')') || (a=='{' && b=='}') ||(a=='[' && b==']') )
+          return true;
+        
+        return false;
+        
+    }
+    static boolean ispar(String x)
+    {
+        // add your code here
+        Stack<Character> st=new Stack<Character>();
+
+     //   Deque<Character> st=new ArrayDeque<Character>();
+        for(int i=0;i<x.length();i++)
+        {
+            char ch=x.charAt(i);
+            
+            if( ch=='(' ||ch=='{' ||ch=='[')
+                st.push(ch);
+            else
+            {
+                if(!st.isEmpty())
+                {
+                    char top=st.peek();
+                    if(matching(top,ch)==true)
+                        st.pop();
+                    else
+                         return false;
+                }
+                else
+                   return false;
+            }
+            
+        }
+        return(st.isEmpty()==true);
+    }
+}
+-------------------------------------------------------------------------------------------------
+class Solution
+{
+   static  boolean solve(Stack<Character> st,char ch)
+   {
+       if(st.isEmpty())
+       {
+           return false;
+       }
+       
+       char top=st.peek();
+       if(top=='(' && ch==')' || top=='{' && ch=='}' || top=='[' && ch==']')
+       {
+           return true;
+       }
+       return false;
+   }
+    
+    //Function to check if brackets are balanced or not.
+    static boolean ispar(String x)
+    {
+        Stack<Character> st=new Stack<Character>();
+        // add your code here
+        for(int i=0;i<x.length();i++)
+        {
+            boolean flag=false;
+            char ch=x.charAt(i);
+            
+            if(ch=='('|| ch=='{' || ch=='[')
+            {
+                st.push(ch);
+            }
+            else if(ch==')'||ch=='}'||ch==']')
+            {
+                 flag=solve(st,ch);
+                 
+                 if(flag==false)
+                 {
+                     return false;
+                 }
+                 st.pop();
+
+            }
+            
+        }
+        if(st.isEmpty())
+        {
+           return true; 
+        }
+        
+        return false;
+    }
+}
