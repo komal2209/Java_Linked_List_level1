@@ -37,3 +37,30 @@ class Solution {
 
     }
 }
+
+-------------------------------------------
+Expected Time Complexity: O(N/2).
+Expected Auxiliary Space: O(1).
+class Solution {
+    Node deleteMid(Node head) {
+        // This is method only submission.
+        // You only need to complete the method.
+        
+        if(head==null || head.next==null)
+        {
+            return null;
+        }
+        
+        Node First=head;
+        Node Second=head;
+        Node PREV=null;
+        while(Second !=null && Second.next!=null)
+        {
+            PREV=First;
+            First=First.next;
+            Second=Second.next.next;
+        }
+       PREV.next=First.next;
+       return head;
+    }
+}

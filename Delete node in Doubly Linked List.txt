@@ -56,3 +56,32 @@ class Solution
 	return head;
     }
 }
+-------------------------------------------------------------------------------------
+class Solution
+{
+    // function returns the head of the linkedlist
+    Node deleteNode(Node head,int x)
+    {
+	// Your code here
+	if(head==null)
+	return null;
+	if(x==1 && head.next!=null)
+	{
+	    
+	    head=head.next;
+	    head.prev=null;
+	    return head;
+	}
+	
+	Node curr=head;
+	int count=1;
+	while(count<x-1)
+	{
+	    curr=curr.next;
+	    count++;
+	}
+	
+	curr.next=curr.next.next;
+	return head;
+  }
+}

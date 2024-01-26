@@ -35,3 +35,55 @@ public static Node reverseDLL(Node  head)
     
     return main;
 }
+
+
+
+--------------------------------------------------------------
+public static Node reverseDLL(Node  head)
+{
+    //Your code here
+     if(head==null|| head.next==null)
+    {
+        return head;
+    }
+    Node curr=head;
+    Node PREV=null;
+     while(curr!=null)
+    {
+        
+        Node NEXT=curr.next;
+         PREV=curr.prev;
+         curr.next=PREV;
+         curr.prev=NEXT;
+         curr=NEXT;
+    }
+    if(PREV!=null)
+    {
+        head=PREV.prev;
+    }
+    return head;
+}
+-------------------------------------
+public static Node reverseDLL(Node  head)
+{
+    //Your code here
+     if(head==null|| head.next==null)
+    {
+        return head;
+    }
+   
+        Node curr=head,PREV=null;
+        
+        while(curr!=null)
+        {
+            Node NEXT=curr.next;
+            PREV=curr.prev;
+            curr.next=PREV;
+            curr.prev=NEXT;
+            curr=curr.prev;
+        }
+        if(PREV!=null)
+        return PREV.prev;
+            
+       return head;
+}

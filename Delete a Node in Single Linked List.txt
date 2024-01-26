@@ -45,3 +45,29 @@ curr.next=curr.next.next;
 return head;
     }
 }
+
+
+
+---------------------------------------------------------------------------------------
+class GfG
+{
+    Node deleteNode(Node head, int x)
+    {
+	// Your code here	
+	if(head==null)
+	    return null;
+	if(x==1 && head.next==null)
+	    return null;
+	 if(x==1 && head.next!=null)
+        return head.next;
+	
+	Node curr=head;
+	for(int i=1;i<x-1;i++)
+	{
+	        curr=curr.next;
+	}
+	curr.next=curr.next.next;
+	return head;
+	
+    }
+}
